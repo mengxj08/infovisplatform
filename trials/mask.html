@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>XXX</title>
+
+<script type ="text/javascript" src ="../image/index.js"></script>
+<script type="text/javaScript" src="../variables/count_time.js"></script>
+<script type="text/javaScript" src="../variables/write_to_file.js"></script>
+
+
+<script>
+//transfer the subject_id through different pages
+	function getdatafromStr(str,name){
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = str.substr(str.indexOf("\?")+1).match(reg);
+		if (r!=null) 
+			return unescape(r[2]); 
+		return null;
+	}
+</script>
+
+<script>
+	function jump(next_page)//attach the subject_id to the html path of next_page
+		location.href = next_page + "?value=" + getdatafromStr(location.href,"value");
+</script>
+</head>
+
+<body>
+	  <script>document.body.style.cursor = "none";</script>
+	  <table>
+		<b>Subject ID: </b> 
+			   <script>document.write(getdatafromStr(location.href, "value"));</script>
+		&nbsp; Trial: 
+			   <script>document.write("trials" + ",");</script>	
+		&nbsp;
+		 	   
+		<hr />	
+	</table>
+	 <div align = "left">
+		 <img id = "mask" style = "width:1000px; height:600px">
+		 
+		 <script> 
+		 function show_image()
+         {
+		  		var i = Math.round(Math.random() * (image.length - 1));
+          		document.getElementById("mask").setAttribute('src', "../image/" + image[i]);
+         }
+  		 show_image();
+		 
+		 while(1)
+		 {
+  		  	var name = prompt("what's the corresponding XXX value?", "null");
+			if(name != "null")
+				break;
+		 }
+  		 var subject_file = "subject_" + getdatafromStr(location.href, "value");
+  		 wfile("\t users' input: " + name.toString(),subject_file);
+		 
+  		 jump(XXX);
+  		 </script>
+	</div>
+</body>
+</html>

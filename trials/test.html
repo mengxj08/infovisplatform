@@ -1,0 +1,81 @@
+<html>
+<title>XXX</title>
+
+
+<script type="text/javascript" src="../protovis.js"></script>
+<script type="text/javascript" src="../dataset/XXX"></script>
+<script type="text/javaScript" src="../variables/count_time.js"></script>
+<script type="text/javaScript" src="../variables/write_to_file.js"></script>
+<script type="text/javaScript" src="../variables/draw_picture.js"></script>
+ 
+<script>
+//transfer the subject_id through different pages
+	function getdatafromStr(str,name){
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = str.substr(str.indexOf("\?")+1).match(reg);
+		if (r!=null) 
+			return unescape(r[2]); 
+		return null;
+	}
+</script>
+
+<script>
+//Get the subject_id value and form the path for current page
+	function jump(next_page)
+	{
+		location.href = next_page + "?value=" + getdatafromStr(location.href,"value");
+	}
+</script>			
+
+<script>
+//monitor the space key press event, and stop the timer;
+	document.onkeypress = function(e){
+		var e = window.event || e;
+		var keyunicode = e.charCode || e.keyCode;
+		var subject_file = getdatafromStr(location.href,"value");
+		subject_file = "subject_" + subject_file.toString();
+		if(keyunicode == 32)
+		{
+		 	stop_timer();
+			//write the target tuple to the log file
+			wfile(getfilename()+ "\t" + get_highlight(), subject_file.toString());
+			//write the spent time on this page	to the log file
+			wfile(
+        		  "\t time spent"+"\t" 
+        		  + Math.floor(secs/60000) + "min, "
+        		  + Math.floor(Math.floor(secs % 60000) / 1000) + "s, "
+        		  + secs%1000 + "ms", 
+        		  subject_file.toString());	
+			//jump to the mask page	  
+			jump(XXX);
+		}
+			
+	}
+</script>
+
+</head>
+
+<body> <left>
+	<table>
+		<b>Subject ID: </b> 
+			   <script>document.write(getdatafromStr(location.href, "value"));</script>
+		&nbsp; Block: 
+			   <script>document.write("blocks" + ",");</script>
+		&nbsp; Trial: 
+			   <script>document.write("trials" + ",");</script>	
+		&nbsp;
+		<b>Timer. <script language="JavaScript">run()</script> </b> 
+		<hr />	
+	
+		<b><script>//document.write(document.title)
+		</script></b>
+		<p>With the highlighted X1 value (<b style="color:red">red cross</b>), what's the corresponding Xn value?</p>
+	</table>
+	
+	<div id = "show_diagram" style="margin-top:20">
+		<script>document.body.style.cursor = "none";</script>
+		<script type="text/javascript+protovis">XXX</script>
+	</div>
+  
+</body>
+</html>
