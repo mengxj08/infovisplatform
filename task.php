@@ -95,10 +95,8 @@ $data_name = "data_" . trim($ID1) . "_" . trim($ID3) . "_" . trim($ID2) . "_" . 
 <script type="text/javaScript" src="variables/draw_picture.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
-//Get the subject_id value and form the path for current page
 	function jump(next_page)
 	{
-		//location.href = next_page + "?value=" + getdatafromStr(location.href,"value");
 		location.href = next_page;
 	}
 //monitor the space key press event, and stop the timer;
@@ -106,7 +104,7 @@ $data_name = "data_" . trim($ID1) . "_" . trim($ID3) . "_" . trim($ID2) . "_" . 
 		var subject_file = <?php echo $user ?>;
 		subject_file = "subject_" + subject_file.toString() + "_data";
 		$(window).keypress(function(e){
-			if(e.keyCode == 0)
+			if(e.which == 32)
 			{
 				//stop_timer();
 				//write the target tuple to the log file
@@ -119,37 +117,6 @@ $data_name = "data_" . trim($ID1) . "_" . trim($ID3) . "_" . trim($ID2) . "_" . 
 		});
 	});
 </script>			
-
-<script>
-
-/*
-	document.onkeypress = function(e){
-		var e = window.event || e;
-		var keyunicode = e.charCode || e.keyCode;
-		//var subject_file = getdatafromStr(location.href,"value");
-		var subject_file = <?php echo $user ?>;
-		subject_file = "subject_" + subject_file.toString() + "_official";
-		if(keyunicode == 32)
-		{
-		 	stop_timer();
-			//write the target tuple to the log file
-			wfile(getfilename()+ "\t" + get_highlight(), subject_file.toString());
-			//write the spent time on this page	to the log file
-			wfile(
-        		  "\t time spent"+"\t" 
-        		  + Math.floor(secs/60000) + "min, "
-        		  + Math.floor(Math.floor(secs % 60000) / 1000) + "s, "
-        		  + secs%1000 + "ms", 
-        		  subject_file.toString());
-				 
-			//jump to the mask page	  
-			jump("mask.php");
-		}
-			
-	}
-*/
-</script>
-
 </head>
 <body> <left>
 	<table>
@@ -161,10 +128,7 @@ $data_name = "data_" . trim($ID1) . "_" . trim($ID3) . "_" . trim($ID2) . "_" . 
 		&nbsp;
 		<b>Timer. <script language="JavaScript">run()</script> </b> 
 		<hr />	
-	
-		<b><script>//document.write(document.title)
-		</script></b>
-		<p>With the highlighted X1 value (<b style="color:red">red cross</b>), what's the corresponding X4 value?</p>
+		<p>With the highlighted X1 value (<b style="color:red">red cross</b>), what's the corresponding X<?php echo trim(substr($ID2,0,2)) ?> value?</p>
 	</table>
 	
 	<div id = "show_diagram" style="margin-top:20">
