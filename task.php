@@ -124,7 +124,7 @@ $data_name = "data_" . trim($ID1) . "_" . trim($ID3) . "_" . trim($ID2) . "_" . 
 			  <?php echo $user ?>
 		&nbsp; Trial: <?php echo $CurrentTrial ?>/<?php echo $TrialsperBlock ?>
 		&nbsp;
-		&nbsp; Block: <?php echo ($block + 1) ?>/<?php echo ($max_blocks + 1) ?>
+		&nbsp; Block: <?php echo ($block + 1) ?>/<?php echo $max_blocks ?>
 		&nbsp;
 		<b>Timer. <script language="JavaScript">run()</script> </b> 
 		<hr />	
